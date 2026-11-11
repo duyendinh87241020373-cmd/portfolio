@@ -1,8 +1,5 @@
 <div align="center">Hi, I'm Đinh Phạm Mỹ Duyên 👋
 E-Commerce Student | Digital Marketing | Affiliate & Livestream Enthusiast
-
-
-
 </div>👩‍💻 About Me
 Xin chào! Mình là Đinh Phạm Mỹ Duyên, sinh viên ngành Thương mại điện tử (E-Commerce), yêu thích việc kết hợp công nghệ, sáng tạo nội dung và kinh doanh trực tuyến để mang lại trải nghiệm mua sắm tốt hơn.
 - 🔭 Quan tâm đến vận hành sàn thương mại điện tử, xây dựng chiến dịch bán hàng và phát triển kênh Affiliate.
