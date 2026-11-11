@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1023" />
+  <meta name="description" content="Portfolio cá nhân của Đinh Phạm Mỹ Duyên — sinh viên ngành Thương mại điện tử, yêu thích công nghệ và sáng tạo số." />
+  <title>Đinh Phạm Mỹ Duyên | Portfolio</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg:#090e1e; --bg2:#101932; --surface:rgba(255,255,255,.055);
+      --stroke:rgba(255,255,255,.13); --text:#f6f7ff; --muted:#abb5d0;
+      --violet:#a58cff; --cyan:#66e1ee; --pink:#ff90c6; --max:1120px;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:90px; }
+    body { margin:0; min-width:320px; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--text); line-height:1.65; overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    button,input,textarea { font:inherit; }
+    button { cursor:pointer; }
+    ::selection { background:#a58cff90; color:white; }
+    .ambient { position:fixed; inset:0; z-index:-3; pointer-events:none; background:radial-gradient(ellipse at 13% 18%,#603ea333,transparent 34%),radial-gradient(ellipse at 85% 25%,#167f9630,transparent 38%),radial-gradient(ellipse at 50% 88%,#7a42842b,transparent 45%),linear-gradient(155deg,#080d1e,#10172e 56%,#0a1124); }
+    #bubbles { position:fixed; inset:0; overflow:hidden; z-index:-2; pointer-events:none; }
+    .bubble { position:absolute; bottom:-150px; border-radius:50%; border:1px solid rgba(192,212,255,.23); background:radial-gradient(circle at 28% 25%,rgba(255,255,255,.28),rgba(147,166,255,.11) 42%,rgba(122,174,255,.015) 75%); box-shadow:inset -8px -8px 24px rgba(135,107,255,.06),0 0 20px rgba(95,214,235,.055); opacity:0; animation:floatUp var(--duration) linear var(--delay) infinite; will-change:transform,opacity; }
+    @keyframes floatUp { 0% { transform:translate3d(0,0,0) scale(.8); opacity:0; } 10% {opacity:var(--opacity);} 85% {opacity:var(--opacity);} 100% {transform:translate3d(var(--drift),-120vh,0) scale(1.15);opacity:0;} }
+    .container { width:min(var(--max),calc(100% - 48px)); margin-inline:auto; }
+    .header { position:sticky; top:0; z-index:20; backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); border-bottom:1px solid rgba(255,255,255,.09); background:rgba(9,14,30,.76); }
+    .nav { display:flex; align-items:center; justify-content:space-between; min-height:76px; gap:20px; }
+    .logo { font-weight:850; letter-spacing:-.07em; font-size:1.5rem; white-space:nowrap; }
+    .logo span { color:var(--cyan); }
+    .nav-links { display:flex; align-items:center; gap:clamp(14px,2.8vw,34px); }
+    .nav-links a { color:#c7cfe1; font-size:.92rem; transition:color .2s; }
+    .nav-links a:hover,.nav-links a.active { color:var(--cyan); }
+    .menu-toggle { display:none; width:44px; height:44px; border:1px solid var(--stroke); border-radius:12px; background:var(--surface); color:white; font-size:1.4rem; align-items:center; justify-content:center; }
+    .hero { min-height:min(790px,calc(100svh - 76px)); display:grid; grid-template-columns:1.23fr .77fr; align-items:center; gap:60px; padding-block:110px 100px; }
+    .eyebrow { display:inline-flex; gap:9px; align-items:center; padding:8px 15px; font-size:.82rem; font-weight:700; color:#dddcff; letter-spacing:.05em; border:1px solid rgba(165,140,255,.35); background:rgba(165,140,255,.11); border-radius:100px; }
+    .status-dot { width:8px; height:8px; border-radius:50%; background:var(--cyan); box-shadow:0 0 0 5px #66e1ee18,0 0 12px #66e1ee75; }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { font-size:clamp(3.1rem,6.3vw,6rem); line-height:1.08; letter-spacing:-.075em; margin:24px 0 20px; font-weight:850; }
+    .gradient-text { background:linear-gradient(115deg,#bbaaff 5%,#80dafa 55%,#ffc1de); color:transparent; -webkit-background-clip:text; background-clip:text; }
+    .hero-sub { color:#e1e6f7; font-size:clamp(1.08rem,1.6vw,1.3rem); font-weight:600; margin-bottom:14px; }
+    .hero-desc { max-width:600px; color:var(--muted); font-size:1rem; margin-bottom:30px; }
+    .actions { display:flex; gap:14px; flex-wrap:wrap; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; border-radius:13px; padding:13px 21px; font-size:.93rem; font-weight:750; border:1px solid transparent; transition:transform .2s,background .2s,box-shadow .2s; }
+    .btn:hover { transform:translateY(-3px); }
+    .btn-primary { background:linear-gradient(110deg,var(--violet),#77cde8); color:#11172c; box-shadow:0 10px 35px #957dfb40; }
+    .btn-outline { border-color:var(--stroke); background:rgba(255,255,255,.045); }
+    .btn-outline:hover { background:rgba(255,255,255,.1); }
+    .socials { display:flex; align-items:center; gap:12px; margin-top:34px; color:var(--muted); font-size:.86rem; }
+    .socials .line { width:38px; height:1px; background:#56617f; }
+    .socials a { color:var(--cyan); font-weight:700; }
+    .portrait-outer { position:relative; width:min(100%,370px); aspect-ratio:1; margin:auto; display:grid; place-items:center; }
+    .portrait-outer:before { content:""; position:absolute; inset:-11%; background:conic-gradient(from 10deg,transparent 10%,#a58cff35 30%,transparent 48%,#66e1ee36 66%,transparent 83%); filter:blur(24px); border-radius:50%; animation:spin 17s linear infinite; }
+    @keyframes spin { to {transform:rotate(360deg);} }
+    .portrait { position:relative; width:83%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; flex-direction:column; border-radius:38% 62% 60% 40% / 42% 43% 57% 58%; border:1px solid #ffffff3a; background:linear-gradient(135deg,#aa8dff54,#75d6ef36 52%,#f48dc543); box-shadow:inset 0 0 45px #ffffff0d,0 25px 90px #03091790; animation:morph 10s ease-in-out infinite; }
+    @keyframes morph { 50% {border-radius:57% 43% 42% 58% / 49% 59% 41% 51%; transform:translateY(-10px);} }
+    .portrait-initials { font-size:clamp(4.4rem,10vw,7rem); line-height:1; font-weight:900; letter-spacing:-.1em; background:linear-gradient(120deg,#fff,#cceaff); color:transparent; -webkit-background-clip:text; background-clip:text; text-shadow:0 8px 40px #ffffff16; }
+    .portrait-small { margin-top:14px; color:#e9eaff; letter-spacing:.22em; font-size:.67rem; font-weight:750; }
+    .floating-tag { position:absolute; background:#192440dc; border:1px solid #ffffff2d; box-shadow:0 16px 35px #0004; backdrop-filter:blur(12px); border-radius:14px; padding:11px 16px; font-size:.82rem; font-weight:750; }
+    .tag-one { left:-6%; top:16%; transform:rotate(-8deg); }
+    .tag-two { right:-9%; bottom:20%; transform:rotate(8deg); }
+    .section { padding-block:94px; }
+    .section-heading { max-width:680px; margin-bottom:36px; }
+    .kicker { font-size:.82rem; font-weight:850; letter-spacing:.16em; text-transform:uppercase; color:var(--cyan); margin-bottom:10px; }
+    h2 { font-size:clamp(2rem,3.4vw,3.1rem); line-height:1.2; letter-spacing:-.055em; margin-bottom:14px; }
+    .section-heading > p:last-child { color:var(--muted); margin:0; }
+    .glass { background:var(--surface); border:1px solid var(--stroke); border-radius:23px; box-shadow:0 16px 70px #03091630; backdrop-filter:blur(12px); }
+    .about-card { display:grid; grid-template-columns:1.25fr .75fr; gap:42px; padding:clamp(26px,4vw,48px); }
+    .about-card p { color:var(--muted); margin-bottom:16px; }
+    .about-card strong { color:#f7f6ff; }
+    .about-details { display:grid; gap:12px; align-content:center; }
+    .detail { padding:16px 18px; border:1px solid #ffffff15; border-radius:15px; background:#ffffff08; }
+    .detail small { display:block; color:#a6afc8; font-size:.75rem; margin-bottom:2px; }
+    .detail strong { font-size:.91rem; }
+    .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:19px; }
+    .skill-card { padding:29px 26px; transition:transform .25s,border-color .25s; }
+    .skill-card:hover,.project-card:hover { transform:translateY(-6px); border-color:#b5a0ff75; }
+    .skill-icon { width:51px; height:51px; border-radius:15px; background:linear-gradient(135deg,#a58cff37,#66e1ee27); display:grid; place-items:center; font-size:1.55rem; margin-bottom:20px; }
+    .skill-card h3 { font-size:1.08rem; margin-bottom:8px; }
+    .skill-card p { color:var(--muted); font-size:.9rem; margin:0 0 17px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; }
+    .chip { display:inline-block; padding:5px 10px; border-radius:8px; color:#d8def1; font-size:.75rem; font-weight:650; background:#ffffff0e; border:1px solid #ffffff18; }
+    .projects-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:19px; }
+    .project-card { overflow:hidden; transition:transform .25s,border-color .25s; }
+    .project-art { min-height:175px; display:flex; align-items:center; justify-content:center; position:relative; isolation:isolate; overflow:hidden; }
+    .project-art::before,.project-art::after { content:""; position:absolute; z-index:-1; border-radius:50%; filter:blur(2px); }
+    .project-art::before { width:180px; height:180px; left:-50px; top:-70px; background:#ffffff17; }
+    .project-art::after { width:150px; height:150px; right:-55px; bottom:-90px; background:#ffffff21; }
+    .art-1 { background:linear-gradient(135deg,#5d3f93,#8156ac 55%,#b6799d); }
+    .art-2 { background:linear-gradient(135deg,#165a79,#238da0 58%,#5db6ad); }
+    .art-3 { background:linear-gradient(135deg,#7d477e,#ae638c 55%,#d58b8d); }
+    .project-icon { font-size:3.8rem; filter:drop-shadow(0 9px 15px #0003); }
+    .project-body { padding:25px; }
+    .project-type { color:var(--cyan); text-transform:uppercase; letter-spacing:.1em; font-size:.72rem; font-weight:850; }
+    .project-body h3 { margin:9px 0; font-size:1.1rem; }
+    .project-body p { color:var(--muted); font-size:.9rem; min-height:86px; margin-bottom:18px; }
+    .project-note { display:inline-flex; gap:8px; align-items:center; font-size:.81rem; color:#ddd6ff; font-weight:700; }
+    .contact-card { padding:clamp(30px,5vw,65px); text-align:center; position:relative; overflow:hidden; }
+    .contact-card::before { content:""; position:absolute; width:360px; height:360px; border-radius:50%; background:#a58cff1b; filter:blur(55px); left:50%; top:-200px; transform:translateX(-50%); pointer-events:none; }
+    .contact-card h2 { position:relative; }
+    .contact-card p { max-width:520px; color:var(--muted); margin:0 auto 25px; }
+    .contact-actions { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+    .contact-hint { font-size:.78rem; color:#8c9ab8; margin-top:20px; }
+    footer { padding:28px 0 34px; border-top:1px solid #ffffff12; color:#9da8c0; font-size:.83rem; }
+    .footer-row { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+    .reveal { opacity:0; transform:translateY(25px); transition:opacity .7s ease,transform .7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    @media(max-width:900px) {
+      .hero { grid-template-columns:1fr .72fr; gap:24px; }
+      .skills-grid,.projects-grid { grid-template-columns:repeat(2,1fr); }
+      .about-card { gap:20px; }
+      .tag-one {left:-8%;} .tag-two {right:-7%;}
+    }
+    @media(max-width:680px) {
+      .container { width:min(var(--max),calc(100% - 36px)); }
+      .nav { min-height:68px; }
+      .menu-toggle { display:flex; }
+      .nav-links { position:absolute; top:68px; left:0; right:0; display:none; flex-direction:column; align-items:stretch; gap:0; padding:9px 18px 18px; background:#10172bf7; border-bottom:1px solid var(--stroke); box-shadow:0 20px 30px #0004; }
+      .nav-links.open { display:flex; }
+      .nav-links a { padding:12px; border-radius:9px; }
+      .nav-links a:hover { background:#ffffff10; }
+      .hero { min-height:unset; padding-block:65px 62px; grid-template-columns:1fr; gap:40px; }
+      h1 { font-size:clamp(3.3rem,12vw,5rem); }
+      .portrait-outer { max-width:295px; }
+      .tag-one { left:-4%; } .tag-two { right:-5%; }
+      .section { padding-block:65px; }
+      .about-card { grid-template-columns:1fr; }
+      .skills-grid,.projects-grid { grid-template-columns:1fr; }
+      .project-body p { min-height:unset; }
+      .contact-card { padding:32px 22px; }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; }
+      .bubble { display:none; }
+      .reveal { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <div id="bubbles" aria-hidden="true"></div>
+  <header class="header">
+    <nav class="nav container" aria-label="Điều hướng chính">
+      <a class="logo" href="#home" aria-label="Trang chủ Mỹ Duyên">MD<span>.</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Trang chủ</a>
+        <a href="#about">Giới thiệu</a>
+        <a href="#skills">Kỹ năng</a>
+        <a href="#projects">Dự án</a>
+        <a href="#contact">Liên hệ</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero container" aria-labelledby="hero-title">
+      <div class="hero-content reveal">
+        <div class="eyebrow"><span class="status-dot"></span> WELCOME TO MY PORTFOLIO</div>
+        <h1 id="hero-title">Xin chào, mình là<br><span class="gradient-text">Mỹ Duyên.</span></h1>
+        <p class="hero-sub">Đinh Phạm Mỹ Duyên · Sinh viên Thương mại điện tử</p>
+        <p class="hero-desc">Mình yêu thích cách công nghệ, sáng tạo nội dung và dữ liệu kết hợp để tạo nên những trải nghiệm mua sắm số thật khác biệt. Đây là góc nhỏ để mình chia sẻ hành trình học tập và phát triển.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#projects">Khám phá dự án <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-outline" href="#contact">Kết nối với mình <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="socials"><span class="line"></span> Digital mindset <span aria-hidden="true">✦</span> Creative spirit</div>
+      </div>
+      <div class="portrait-outer reveal" aria-label="Hình đại diện cách điệu chữ MD">
+        <div class="portrait"><div class="portrait-initials">MD</div><div class="portrait-small">DIGITAL & CREATIVE</div></div>
+        <div class="floating-tag tag-one">✦ E-commerce</div>
+        <div class="floating-tag tag-two">✧ Creative thinking</div>
+      </div>
+    </section>
+
+    <section id="about" class="section container" aria-labelledby="about-title">
+      <div class="section-heading reveal"><div class="kicker">01 / About me</div><h2 id="about-title">Một chút <span class="gradient-text">về mình</span></h2><p>Không ngừng học hỏi, thử nghiệm và phát triển trong thế giới số.</p></div>
+      <div class="about-card glass reveal">
+        <div>
+          <p>Chào bạn! Mình là <strong>Đinh Phạm Mỹ Duyên</strong>, hiện theo học ngành <strong>Thương mại điện tử</strong>. Mình quan tâm đến hành vi người tiêu dùng trên nền tảng số, cách xây dựng nội dung thu hút và ứng dụng công nghệ trong hoạt động kinh doanh.</p>
+          <p>Mình tin rằng một ý tưởng tốt sẽ trở nên giá trị hơn khi được triển khai bằng sự sáng tạo, tư duy phân tích và tinh thần hợp tác.</p>
+          <p>Mục tiêu của mình là tích lũy kinh nghiệm thực tế thông qua các dự án và tiếp tục hoàn thiện kỹ năng trong lĩnh vực thương mại điện tử.</p>
+        </div>
+        <div class="about-details">
+          <div class="detail"><small>Họ và tên</small><strong>Đinh Phạm Mỹ Duyên</strong></div>
+          <div class="detail"><small>Chuyên ngành</small><strong>Thương mại điện tử</strong></div>
+          <div class="detail"><small>Mối quan tâm</small><strong>Digital Marketing · E-commerce · Công nghệ</strong></div>
+          <div class="detail"><small>Tinh thần</small><strong>Học hỏi · Sáng tạo · Chủ động</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section container" aria-labelledby="skills-title">
+      <div class="section-heading reveal"><div class="kicker">02 / My skills</div><h2 id="skills-title">Kỹ năng <span class="gradient-text">công nghệ</span></h2><p>Những công cụ và lĩnh vực mình đang tìm hiểu, rèn luyện và phát triển.</p></div>
+      <div class="skills-grid">
+        <article class="skill-card glass reveal"><div class="skill-icon" aria-hidden="true">🛒</div><h3>Thương mại điện tử</h3><p>Tìm hiểu vận hành gian hàng số, sản phẩm, chương trình khuyến mãi và trải nghiệm khách hàng.</p><div class="chips"><span class="chip">Shopee</span><span class="chip">TikTok Shop</span><span class="chip">E-commerce</span></div></article>
+        <article class="skill-card glass reveal"><div class="skill-icon" aria-hidden="true">📈</div><h3>Dữ liệu & phân tích</h3><p>Sử dụng bảng tính và tư duy dữ liệu để theo dõi hiệu quả, tổ chức thông tin và trình bày kết quả.</p><div class="chips"><span class="chip">Excel</span><span class="chip">Google Sheets</span><span class="chip">Reporting</span></div></article>
+        <article class="skill-card glass reveal"><div class="skill-icon" aria-hidden="true">🎨</div><h3>Thiết kế & nội dung số</h3><p>Phát triển ý tưởng truyền thông, thiết kế hình ảnh cơ bản và xây dựng nội dung phù hợp với người xem.</p><div class="chips"><span class="chip">Canva</span><span class="chip">Content</span><span class="chip">Social Media</span></div></article>
+        <article class="skill-card glass reveal"><div class="skill-icon" aria-hidden="true">💻</div><h3>Web cơ bản</h3><p>Tìm hiểu cấu trúc website, thiết kế giao diện responsive và các tương tác phía người dùng.</p><div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div></article>
+        <article class="skill-card glass reveal"><div class="skill-icon" aria-hidden="true">📣</div><h3>Digital Marketing</h3><p>Quan tâm đến chiến dịch số, hành trình khách hàng và tối ưu nội dung để tăng mức độ tương tác.</p><div class="chips"><span class="chip">Campaign</span><span class="chip">SEO basics</span><span class="chip">Analytics</span></div></article>
+        <article class="skill-card glass reveal"><div class="skill-icon" aria-hidden="true">🤝</div><h3>Làm việc & cộng tác</h3><p>Phối hợp nhóm, lên kế hoạch công việc và trình bày ý tưởng rõ ràng, có cấu trúc.</p><div class="chips"><span class="chip">Teamwork</span><span class="chip">Planning</span><span class="chip">Presentation</span></div></article>
+      </div>
+    </section>
+
+    <section id="projects" class="section container" aria-labelledby="projects-title">
+      <div class="section-heading reveal"><div class="kicker">03 / Featured projects</div><h2 id="projects-title">Dự án <span class="gradient-text">tiêu biểu</span></h2><p>Ba ý tưởng dự án minh họa để bạn thay thế bằng bài tập hoặc sản phẩm thực tế của mình.</p></div>
+      <div class="projects-grid">
+        <article class="project-card glass reveal"><div class="project-art art-1"><span class="project-icon" aria-hidden="true">🛍️</span></div><div class="project-body"><div class="project-type">Ý tưởng · E-commerce</div><h3>Thiết kế gian hàng trực tuyến</h3><p>Phác thảo trải nghiệm mua sắm, phân loại sản phẩm và đề xuất bố cục gian hàng thân thiện với người dùng.</p><span class="project-note">✦ Dự án minh họa</span></div></article>
+        <article class="project-card glass reveal"><div class="project-art art-2"><span class="project-icon" aria-hidden="true">📊</span></div><div class="project-body"><div class="project-type">Ý tưởng · Data</div><h3>Dashboard theo dõi doanh thu</h3><p>Minh họa báo cáo các chỉ số như doanh thu, số đơn hàng và tỷ lệ chuyển đổi bằng bảng tính.</p><span class="project-note">✦ Dự án minh họa</span></div></article>
+        <article class="project-card glass reveal"><div class="project-art art-3"><span class="project-icon" aria-hidden="true">📱</span></div><div class="project-body"><div class="project-type">Ý tưởng · Marketing</div><h3>Chiến dịch nội dung mạng xã hội</h3><p>Xây dựng ý tưởng nội dung, lịch đăng bài và hướng truyền thông cho một sản phẩm giả định.</p><span class="project-note">✦ Dự án minh họa</span></div></article>
+      </div>
+    </section>
+
+    <section id="contact" class="section container" aria-labelledby="contact-title">
+      <div class="contact-card glass reveal">
+        <div class="kicker">04 / Get in touch</div>
+        <h2 id="contact-title">Cùng nhau tạo nên <span class="gradient-text">điều thú vị!</span></h2>
+        <p>Mình luôn sẵn sàng kết nối, trao đổi ý tưởng và học hỏi từ những cơ hội mới. Hãy gửi lời chào nhé!</p>
+        <div class="contact-actions">
+          <!-- THAY email mẫu bên dưới bằng địa chỉ email thật trước khi xuất bản. -->
+          <a class="btn btn-primary" href="mailto:duyendinh.87241020373@st.ueh.edu.vn?subject=Xin%20ch%C3%A0o%20M%E1%BB%B9%20Duy%C3%AAn">✉ Gửi email cho mình</a>
+          <button class="btn btn-outline" id="copyEmail" type="button">⧉ Sao chép email</button>
+        </div>
+        <div class="contact-hint" id="emailHint" role="status" aria-live="polite">Email mẫu: emailcuaban@example.com — vui lòng cập nhật trước khi sử dụng</div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="footer-row container"><span>© <span id="year"></span> Đinh Phạm Mỹ Duyên. All rights reserved.</span><span>Made with ♡ & a little bit of magic ✨</span></div></footer>
+
+  <script>
+    (() => {
+      'use strict';
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const bubbleContainer = document.getElementById('bubbles');
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+      const email = 'duyendinh.87241020373@st.ueh.edu.vn';
+
+
+      function createBubbles() {
+        bubbleContainer.replaceChildren();
+        if (reducedMotion.matches) return;
+        const count = window.innerWidth < 680 ? 15 : 27;
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < count; i++) {
+          const bubble = document.createElement('span');
+          const size = 16 + Math.random() * 95;
+          bubble.className = 'bubble';
+          bubble.style.width = `${size}px`;
+          bubble.style.height = `${size}px`;
+          bubble.style.left = `${Math.random() * 100}%`;
+          bubble.style.setProperty('--duration', `${17 + Math.random() * 23}s`);
+          bubble.style.setProperty('--delay', `${-Math.random() * 42}s`);
+          bubble.style.setProperty('--drift', `${-90 + Math.random() * 180}px`);
+          bubble.style.setProperty('--opacity', `${.15 + Math.random() * .32}`);
+          fragment.appendChild(bubble);
+        }
+        bubbleContainer.appendChild(fragment);
+      }
+      createBubbles();
+      if (reducedMotion.addEventListener) reducedMotion.addEventListener('change', createBubbles);
+
+      function closeMenu() {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Mở menu');
+        menuToggle.textContent = '☰';
+      }
+      menuToggle.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', String(open));
+        menuToggle.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+        menuToggle.textContent = open ? '✕' : '☰';
+      });
+      navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
+      document.addEventListener('click', event => { if (!event.target.closest('.nav')) closeMenu(); });
+
+      const revealElements = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !reducedMotion.matches) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {threshold:.08, rootMargin:'0px 0px 35px 0px'});
+        revealElements.forEach(element => observer.observe(element));
+      } else revealElements.forEach(element => element.classList.add('visible'));
+
+      const sections = document.querySelectorAll('main section[id]');
+      const navigationAnchors = [...navLinks.querySelectorAll('a')];
+      if ('IntersectionObserver' in window) {
+        const navObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            navigationAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${entry.target.id}`));
+          });
+        }, { rootMargin:'-30% 0px -60% 0px' });
+        sections.forEach(s => navObserver.observe(s));
+      }
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+      const copyButton = document.getElementById('copyEmail');
+      const emailHint = document.getElementById('emailHint');
+      copyButton.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(email);
+          emailHint.textContent = '✓ Đã sao chép: ' + email;
+        } catch {
+          emailHint.textContent = 'Email: ' + email + ' (hãy chọn và sao chép thủ công)';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
